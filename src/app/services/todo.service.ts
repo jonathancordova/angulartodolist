@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class TodoService {
 todosUrl: string = 'https://jsonplaceholder.typicode.com/todos';
-todosLimit = '?_limit=10';
+todosLimit = '?_limit=5';
 
   constructor(private http:HttpClient) { }
 //get todos
@@ -27,6 +27,11 @@ todosLimit = '?_limit=10';
     const url = `${this.todosUrl}/${todo.id}`;
     return this.http.delete<Todo>(url,httpOptions);
   }
+
+  //add todo
+addTodo(todo:Todo):Observable<Todo>{
+  return this.http.post<Todo>(this.todosUrl, todo, httpOptions);
+}
 
 //toggle completed
 toggleCompleted(todo:Todo):Observable<any>{
